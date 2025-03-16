@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rappresentazione della Memoria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .memory-container {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: auto;
+            border: 2px solid black;
+        }
+        .segment {
+            padding: 10px;
+            margin: 2px;
+            border: 1px solid black;
+        }
+        .text-segment { background-color: lightgray; }
+        .data-segment { background-color: lightblue; }
+        .heap { background-color: lightgreen; min-height: 50px; }
+        .stack { background-color: lightcoral; min-height: 50px; }
+        .legend {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+        .legend div {
+            margin: 5px 0;
+        }
+        .legend span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid black;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rappresentazione Grafica della Memoria</h1>
+    <div class="memory-container">
+        <div class="segment text-segment">Text Segment</div>
+        <div class="segment data-segment">Data Segment</div>
+        <div class="segment heap" id="heap">Heap</div>
+        <div class="segment stack" id="stack">Stack</div>
+    </div>
+    
+    <div class="legend">
+        <h3>Legenda:</h3>
+        <div><span class="text-segment"></span> Text Segment (Codice eseguibile)</div>
+        <div><span class="data-segment"></span> Data Segment (Variabili globali e statiche)</div>
+        <div><span class="heap"></span> Heap (Allocazione dinamica)</div>
+        <div><span class="stack"></span> Stack (Chiamate alle funzioni)</div>
+    </div>
+    
+    <div class="buttons">
+        <button onclick="allocateMemory()">Allocare Memoria</button>
+        <button onclick="deallocateMemory()">Deallocare Memoria</button>
+    </div>
 
+    <script>
+        function allocateMemory() {
+            let heap = document.getElementById("heap");
+            let newBlock = document.createElement("div");
+            newBlock.style.backgroundColor = "darkgreen";
+            newBlock.style.color = "white";
+            newBlock.style.margin = "2px";
+            newBlock.style.padding = "5px";
+            newBlock.innerText = "Allocato";
+            heap.appendChild(newBlock);
+        }
+
+        function deallocateMemory() {
+            let heap = document.getElementById("heap");
+            if (heap.lastChild) {
+                heap.removeChild(heap.lastChild);
+            }
+        }
+    </script>
+</body>
+</html>
